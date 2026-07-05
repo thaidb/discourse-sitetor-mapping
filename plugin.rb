@@ -53,6 +53,12 @@ after_initialize do
     end
   end
 
+  # Category type "Mapping" trong wizard /new-category/setup
+  if respond_to?(:register_category_type)
+    require_relative "app/services/sitetor_mapping/categories/types/mapping"
+    reloadable_patch { register_category_type(SitetorMapping::Categories::Types::Mapping) }
+  end
+
   require_relative "app/controllers/sitetor_mapping/page_controller"
   require_relative "app/controllers/sitetor_mapping/filter_controller"
 

@@ -1,0 +1,12 @@
+vi:
+  site_settings:
+    sitetor_mapping_enabled: "Bật plugin Sitetor Mapping Filter"
+    sitetor_mapping_categories: "ID các category NHU CẦU (Cần mua/Cần thuê) hiển thị tại /mapping (ngăn cách bằng |)"
+    sitetor_mapping_listing_categories: "ID các category TIN ĐĂNG (Bán/Cho thuê) dùng cho nút Giới thiệu ngay (ngăn cách bằng |)"
+    sitetor_mapping_usd_rate: "Tỷ giá USD→VND cho bộ lọc ngân sách"
+    sitetor_mapping_page_size: "Số nhu cầu mỗi trang trên /mapping"
+  category_types:
+    sitetor_mapping:
+      name: "Mapping"
+      title: "mapping"
+      description: "Nhu cầu tìm mua/tìm thuê BĐS — gắn bộ lọc /mapping và nút Giới thiệu ngay (kết nối Cung ↔ Cầu)."

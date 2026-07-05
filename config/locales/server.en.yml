@@ -5,3 +5,8 @@ en:
     sitetor_mapping_listing_categories: "Category IDs of LISTINGS (Bán/Cho thuê) used by the recommend-now button (pipe-separated)"
     sitetor_mapping_usd_rate: "USD to VND exchange rate for budget filter"
     sitetor_mapping_page_size: "Number of demands per page on /mapping"
+  category_types:
+    sitetor_mapping:
+      name: "Mapping"
+      title: "mapping"
+      description: "Buy/rent demands with the /mapping demand filter and the recommend-listing button."
