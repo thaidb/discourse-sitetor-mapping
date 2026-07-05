@@ -8,7 +8,7 @@ import { i18n } from "discourse-i18n";
 // Dropdown checkbox multi-select thuần (details/summary — không phụ thuộc
 // select-kit), có ô tìm nhanh cho danh sách dài (đường phố ~500 mục).
 // args: @label, @options [{value, count}], @selected [string], @onChange(values)
-export default class BdsMultiSelect extends Component {
+export default class MultiSelect extends Component {
   @tracked filterText = "";
 
   get filtered() {
@@ -38,19 +38,19 @@ export default class BdsMultiSelect extends Component {
   }
 
   <template>
-    <details class="bds-ms">
+    <details class="mapping-ms">
       <summary>
         {{@label}}{{#if this.selectedCount}}
-          <span class="bds-ms-count">{{this.selectedCount}}</span>
+          <span class="mapping-ms-count">{{this.selectedCount}}</span>
         {{/if}}
-        <span class="bds-ms-caret">▾</span>
+        <span class="mapping-ms-caret">▾</span>
       </summary>
-      <div class="bds-ms-panel">
+      <div class="mapping-ms-panel">
         {{#if @searchable}}
           <input
             type="text"
-            class="bds-ms-search"
-            placeholder={{i18n "sitetor_mapping.tim_nhanh"}}
+            class="mapping-ms-search"
+            placeholder={{i18n "sitetor_mapping.quick_search"}}
             {{on "input" this.updateFilter}}
           />
         {{/if}}
@@ -63,12 +63,12 @@ export default class BdsMultiSelect extends Component {
                   checked={{this.isChecked o.value}}
                   {{on "change" (fn this.toggle o.value)}}
                 />
-                <span class="bds-ms-value">{{o.value}}</span>
-                <span class="bds-ms-c">({{o.count}})</span>
+                <span class="mapping-ms-value">{{o.value}}</span>
+                <span class="mapping-ms-c">({{o.count}})</span>
               </label>
             </li>
           {{else}}
-            <li class="bds-ms-empty">{{i18n "sitetor_mapping.khong_co_lua_chon"}}</li>
+            <li class="mapping-ms-empty">{{i18n "sitetor_mapping.no_options"}}</li>
           {{/each}}
         </ul>
       </div>

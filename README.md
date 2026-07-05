@@ -21,7 +21,7 @@ Trang **`/mapping`** — bộ lọc **NHU CẦU mua/thuê BĐS** (nửa **Cầu*
 ## Phụ thuộc
 
 **Yêu cầu cài kèm [discourse-sitetor-listing](https://github.com/thaidb/discourse-sitetor-listing)** —
-plugin đó parse & backfill custom fields (`bds_gia`, `bds_quan`, `bds_duong`…) mà
+plugin đó parse & backfill custom fields (`listing_price`, `listing_district`, `listing_street`…) mà
 plugin này đọc. Sau khi cài cả hai, chạy lại `rake sitetor_listing:backfill` để
 quét luôn 2 category nhu cầu.
 

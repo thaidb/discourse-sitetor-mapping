@@ -6,14 +6,14 @@ module SitetorMapping
 
     SORTS = {
       "new" => "topics.bumped_at DESC",
-      "price_asc" => :gia_asc,
-      "price_desc" => :gia_desc,
-      "area_desc" => :dt_desc,
+      "price_asc" => :price_asc,
+      "price_desc" => :price_desc,
+      "area_desc" => :area_desc,
     }.freeze
 
     # GET /mapping/filter.json — lọc topic NHU CẦU (Cần mua/Cần thuê).
-    # Params: q | gia_min, gia_max (VND — ngân sách) | mt_min, mt_max | dt_min, dt_max
-    #         | loai,quan,phuong,duong,vi_tri,huong,tinh (CSV) | category_id | sort | page
+    # Params: q | price_min, price_max (VND — ngân sách) | frontage_min, frontage_max | area_min, area_max
+    #         | type,district,ward,street,position,direction,province (CSV) | category_id | sort | page
     def index
       page = params[:page].to_i
       per = SiteSetting.sitetor_mapping_page_size
@@ -27,9 +27,9 @@ module SitetorMapping
         topics = topics.where("topics.title ILIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:q])}%")
       end
 
-      topics = apply_range(topics, SitetorMapping::FIELD_GIA, :gia_min, :gia_max)
-      topics = apply_range(topics, SitetorMapping::FIELD_MAT_TIEN, :mt_min, :mt_max)
-      topics = apply_range(topics, SitetorMapping::FIELD_DIEN_TICH, :dt_min, :dt_max)
+      topics = apply_range(topics, SitetorMapping::FIELD_PRICE, :price_min, :price_max)
+      topics = apply_range(topics, SitetorMapping::FIELD_FRONTAGE, :frontage_min, :frontage_max)
+      topics = apply_range(topics, SitetorMapping::FIELD_AREA, :area_min, :area_max)
       topics = apply_multi_filters(topics)
 
       total = topics.count
@@ -47,24 +47,24 @@ module SitetorMapping
     def facets
       base = Topic.visible.listable_topics.where(category_id: allowed_category_ids)
 
-      quan_filter = csv_param(:quan)
+      district_filter = csv_param(:district)
       cascade = {}
-      if quan_filter.any?
-        cascade_scope = filter_by_field(base, SitetorMapping::FIELD_QUAN, quan_filter)
+      if district_filter.any?
+        cascade_scope = filter_by_field(base, SitetorMapping::FIELD_DISTRICT, district_filter)
         cascade = {
-          phuong: facet_counts(cascade_scope, SitetorMapping::FIELD_PHUONG),
-          duong: facet_counts(cascade_scope, SitetorMapping::FIELD_DUONG),
+          ward: facet_counts(cascade_scope, SitetorMapping::FIELD_WARD),
+          street: facet_counts(cascade_scope, SitetorMapping::FIELD_STREET),
         }
       end
 
       render json: {
-        loai: facet_counts(base, SitetorMapping::FIELD_LOAI),
-        vi_tri: facet_counts(base, SitetorMapping::FIELD_VI_TRI),
-        huong: facet_counts(base, SitetorMapping::FIELD_HUONG),
-        tinh: facet_counts(base, SitetorMapping::FIELD_TINH),
-        quan: facet_counts(base, SitetorMapping::FIELD_QUAN),
-        phuong: cascade[:phuong] || [],
-        duong: cascade[:duong] || [],
+        type: facet_counts(base, SitetorMapping::FIELD_TYPE),
+        position: facet_counts(base, SitetorMapping::FIELD_POSITION),
+        direction: facet_counts(base, SitetorMapping::FIELD_DIRECTION),
+        province: facet_counts(base, SitetorMapping::FIELD_PROVINCE),
+        district: facet_counts(base, SitetorMapping::FIELD_DISTRICT),
+        ward: cascade[:ward] || [],
+        street: cascade[:street] || [],
       }
     end
 
@@ -126,12 +126,12 @@ module SitetorMapping
 
     def apply_sort(scope)
       case SORTS[params[:sort].to_s]
-      when :gia_asc
-        sort_by_field(scope, SitetorMapping::FIELD_GIA, "ASC")
-      when :gia_desc
-        sort_by_field(scope, SitetorMapping::FIELD_GIA, "DESC")
-      when :dt_desc
-        sort_by_field(scope, SitetorMapping::FIELD_DIEN_TICH, "DESC")
+      when :price_asc
+        sort_by_field(scope, SitetorMapping::FIELD_PRICE, "ASC")
+      when :price_desc
+        sort_by_field(scope, SitetorMapping::FIELD_PRICE, "DESC")
+      when :area_desc
+        sort_by_field(scope, SitetorMapping::FIELD_AREA, "DESC")
       else
         scope.order(bumped_at: :desc)
       end
@@ -158,16 +158,16 @@ module SitetorMapping
         created_at: t.created_at,
         bumped_at: t.bumped_at,
         tags: t.tags.pluck(:name),
-        gia: cf[SitetorMapping::FIELD_GIA]&.to_i,
-        mat_tien: cf[SitetorMapping::FIELD_MAT_TIEN]&.to_f,
-        dien_tich: cf[SitetorMapping::FIELD_DIEN_TICH]&.to_f,
-        loai: cf[SitetorMapping::FIELD_LOAI],
-        vi_tri: cf[SitetorMapping::FIELD_VI_TRI],
-        huong: cf[SitetorMapping::FIELD_HUONG],
-        duong: cf[SitetorMapping::FIELD_DUONG],
-        phuong: cf[SitetorMapping::FIELD_PHUONG],
-        quan: cf[SitetorMapping::FIELD_QUAN],
-        tinh: cf[SitetorMapping::FIELD_TINH],
+        price: cf[SitetorMapping::FIELD_PRICE]&.to_i,
+        frontage: cf[SitetorMapping::FIELD_FRONTAGE]&.to_f,
+        area: cf[SitetorMapping::FIELD_AREA]&.to_f,
+        type: cf[SitetorMapping::FIELD_TYPE],
+        position: cf[SitetorMapping::FIELD_POSITION],
+        direction: cf[SitetorMapping::FIELD_DIRECTION],
+        street: cf[SitetorMapping::FIELD_STREET],
+        ward: cf[SitetorMapping::FIELD_WARD],
+        district: cf[SitetorMapping::FIELD_DISTRICT],
+        province: cf[SitetorMapping::FIELD_PROVINCE],
       }
     end
   end

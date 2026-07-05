@@ -13,7 +13,7 @@ import { i18n } from "discourse-i18n";
 
 // Modal "Giới thiệu ngay": chủ listing chọn 1 tin trong tài khoản
 // (category Bán/Cho thuê) → tạo reply gắn link vào topic NHU CẦU.
-export default class GioiThieuNgayModal extends Component {
+export default class RecommendNowModal extends Component {
   @service currentUser;
   @service siteSettings;
 
@@ -65,7 +65,7 @@ export default class GioiThieuNgayModal extends Component {
         type: "POST",
         data: {
           topic_id: this.args.model.topic.id,
-          raw: `${i18n("sitetor_mapping.gioi_thieu_raw")}:\n\n${window.location.origin}/t/${chosen.slug}/${chosen.id}`,
+          raw: `${i18n("sitetor_mapping.recommend_message")}:\n\n${window.location.origin}/t/${chosen.slug}/${chosen.id}`,
         },
       });
       this.sent = true;
@@ -78,27 +78,27 @@ export default class GioiThieuNgayModal extends Component {
 
   <template>
     <DModal
-      @title={{i18n "sitetor_mapping.gioi_thieu_title"}}
+      @title={{i18n "sitetor_mapping.recommend_title"}}
       @closeModal={{@closeModal}}
-      class="gioi-thieu-modal"
+      class="recommend-modal"
     >
       <:body>
         {{#if this.sent}}
-          <p class="gioi-thieu-sent">✅ {{i18n "sitetor_mapping.gioi_thieu_thanh_cong"}}</p>
+          <p class="recommend-sent">✅ {{i18n "sitetor_mapping.recommend_success"}}</p>
           <p>
             <a href="/t/{{@model.topic.slug}}/{{@model.topic.id}}">
-              {{i18n "sitetor_mapping.xem_nhu_cau"}}
+              {{i18n "sitetor_mapping.view_demand"}}
             </a>
           </p>
         {{else if (eq this.listings null)}}
           <p>…</p>
         {{else if this.listings.length}}
-          <p class="gioi-thieu-demand">
-            {{i18n "sitetor_mapping.gioi_thieu_cho"}}
+          <p class="recommend-demand">
+            {{i18n "sitetor_mapping.recommend_for"}}
             <strong>{{@model.topic.title}}</strong>
           </p>
-          <p>{{i18n "sitetor_mapping.gioi_thieu_hint"}}</p>
-          <ul class="gioi-thieu-list">
+          <p>{{i18n "sitetor_mapping.recommend_hint"}}</p>
+          <ul class="recommend-list">
             {{#each this.listings as |t|}}
               <li>
                 <label>
@@ -114,19 +114,19 @@ export default class GioiThieuNgayModal extends Component {
             {{/each}}
           </ul>
         {{else}}
-          <p>{{i18n "sitetor_mapping.gioi_thieu_khong_co"}}</p>
+          <p>{{i18n "sitetor_mapping.recommend_empty"}}</p>
         {{/if}}
       </:body>
       <:footer>
         {{#unless this.sent}}
           <DButton
             @action={{this.send}}
-            @label="sitetor_mapping.gioi_thieu_gui"
+            @label="sitetor_mapping.recommend_send"
             @disabled={{this.saving}}
             class="btn-primary"
           />
         {{/unless}}
-        <DButton @action={{@closeModal}} @label="sitetor_mapping.dong" />
+        <DButton @action={{@closeModal}} @label="sitetor_mapping.close" />
       </:footer>
     </DModal>
   </template>

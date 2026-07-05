@@ -2,7 +2,7 @@
 
 # name: discourse-sitetor-mapping
 # about: Sitetor Mapping Filter — trang /mapping lọc NHU CẦU mua/thuê BĐS (nửa Cầu của thị trường, đối xứng /listing) + nút Giới thiệu ngay
-# version: 0.1.0
+# version: 0.2.0
 # authors: Sitetor
 # url: https://lms.sitetor.com
 
@@ -14,26 +14,26 @@ module ::SitetorMapping
   PLUGIN_NAME = "discourse-sitetor-mapping"
 
   # đọc chung custom fields do discourse-sitetor-listing parse/backfill
-  FIELD_GIA = "bds_gia"
-  FIELD_MAT_TIEN = "bds_mat_tien"
-  FIELD_DIEN_TICH = "bds_dien_tich"
-  FIELD_LOAI = "bds_loai"
-  FIELD_VI_TRI = "bds_vi_tri"
-  FIELD_HUONG = "bds_huong"
-  FIELD_SO_NHA = "bds_so_nha"
-  FIELD_DUONG = "bds_duong"
-  FIELD_PHUONG = "bds_phuong"
-  FIELD_QUAN = "bds_quan"
-  FIELD_TINH = "bds_tinh"
+  FIELD_PRICE = "listing_price"
+  FIELD_FRONTAGE = "listing_frontage"
+  FIELD_AREA = "listing_area"
+  FIELD_TYPE = "listing_type"
+  FIELD_POSITION = "listing_position"
+  FIELD_DIRECTION = "listing_direction"
+  FIELD_STREET_NUMBER = "listing_street_number"
+  FIELD_STREET = "listing_street"
+  FIELD_WARD = "listing_ward"
+  FIELD_DISTRICT = "listing_district"
+  FIELD_PROVINCE = "listing_province"
 
   MULTI_FILTERS = {
-    "loai" => FIELD_LOAI,
-    "vi_tri" => FIELD_VI_TRI,
-    "huong" => FIELD_HUONG,
-    "duong" => FIELD_DUONG,
-    "phuong" => FIELD_PHUONG,
-    "quan" => FIELD_QUAN,
-    "tinh" => FIELD_TINH,
+    "type" => FIELD_TYPE,
+    "position" => FIELD_POSITION,
+    "direction" => FIELD_DIRECTION,
+    "street" => FIELD_STREET,
+    "ward" => FIELD_WARD,
+    "district" => FIELD_DISTRICT,
+    "province" => FIELD_PROVINCE,
   }.freeze
 end
 
