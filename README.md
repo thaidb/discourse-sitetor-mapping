@@ -27,7 +27,7 @@ quét luôn 2 category nhu cầu.
 
 ## Cài đặt
 
-Thêm vào `app.yml` (cạnh dòng clone sitetor-filter):
+Thêm vào `app.yml` (cạnh dòng clone sitetor-listing):
 
 ```yaml
           - git clone https://github.com/thaidb/discourse-sitetor-listing.git

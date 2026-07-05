@@ -13,7 +13,7 @@ register_asset "stylesheets/sitetor-mapping.scss"
 module ::SitetorMapping
   PLUGIN_NAME = "discourse-sitetor-mapping"
 
-  # đọc chung custom fields do discourse-sitetor-filter parse/backfill
+  # đọc chung custom fields do discourse-sitetor-listing parse/backfill
   FIELD_GIA = "bds_gia"
   FIELD_MAT_TIEN = "bds_mat_tien"
   FIELD_DIEN_TICH = "bds_dien_tich"
