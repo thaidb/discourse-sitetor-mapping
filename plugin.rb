@@ -43,6 +43,14 @@ after_initialize do
       engine_name PLUGIN_NAME
       isolate_namespace SitetorMapping
     end
+
+    # Mở rộng danh sách category gồm cả sub + sub-sub (hỗ trợ gộp về
+    # 1 category cha Mapping với cây con Cần mua/Cần thuê bên trong)
+    def self.with_descendants(ids)
+      children = Category.where(parent_category_id: ids).pluck(:id)
+      grandchildren = Category.where(parent_category_id: children).pluck(:id)
+      (ids + children + grandchildren).uniq
+    end
   end
 
   require_relative "app/controllers/sitetor_mapping/page_controller"

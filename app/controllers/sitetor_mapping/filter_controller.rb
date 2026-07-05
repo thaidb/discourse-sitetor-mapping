@@ -73,10 +73,9 @@ module SitetorMapping
     def allowed_category_ids
       ids = SiteSetting.sitetor_mapping_categories.split("|").map(&:to_i)
       if params[:category_id].present? && ids.include?(params[:category_id].to_i)
-        [params[:category_id].to_i]
-      else
-        ids
+        ids = [params[:category_id].to_i]
       end
+      SitetorMapping.with_descendants(ids)
     end
 
     def csv_param(key)
