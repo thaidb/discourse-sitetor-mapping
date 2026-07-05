@@ -5,38 +5,105 @@
   margin: 0 auto;
   padding: 1em;
 
-  .mapping-filters {
+  // ===== layout 2 cột: sidebar filter dọc trái (kiểu /launch) + kết quả phải =====
+  .mapping-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .mapping-sidebar {
+    flex: 0 0 280px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     background: var(--primary-very-low);
     border: 1px solid var(--primary-low);
     border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 1em;
+    padding: 14px;
+    position: sticky;
+    top: calc(var(--header-offset, 60px) + 12px);
+    max-height: calc(100vh - var(--header-offset, 60px) - 24px);
+    overflow-y: auto;
+
+    // multi-select trong sidebar: mở tại chỗ, không đè nội dung
+    .mapping-ms {
+      > summary {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .mapping-ms-caret {
+          margin-left: auto;
+        }
+      }
+
+      .mapping-ms-panel {
+        position: static;
+        min-width: 0;
+        box-shadow: none;
+        margin-top: 6px;
+        max-height: 240px;
+      }
+    }
   }
 
-  .mapping-filter-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 12px;
-    align-items: flex-end;
+  .mapping-content {
+    flex: 1;
+    min-width: 0;
+  }
 
-    + .mapping-filter-row {
-      margin-top: 10px;
+  .mapping-range {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    input {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  .mapping-actions {
+    display: flex;
+    gap: 8px;
+
+    .btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+
+  // mobile: sidebar xếp lên trên, hết sticky
+  @media (max-width: 850px) {
+    .mapping-layout {
+      flex-direction: column;
+    }
+
+    .mapping-sidebar {
+      position: static;
+      width: 100%;
+      flex-basis: auto;
+      max-height: none;
     }
   }
 
   .mapping-filter-group {
     display: flex;
-    align-items: center;
-    gap: 6px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
 
     label {
       font-weight: 600;
-      margin: 0 4px 0 0;
+      margin: 0;
       white-space: nowrap;
     }
 
-    input {
-      width: 90px;
+    input,
+    select {
+      width: 100%;
       margin: 0;
     }
   }
@@ -105,7 +172,7 @@
   }
 
   .mapping-filter-q input {
-    width: 220px;
+    width: 100%;
   }
 
   .mapping-filter-group select {
