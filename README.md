@@ -20,9 +20,9 @@ Trang **`/mapping`** — bộ lọc **NHU CẦU mua/thuê BĐS** (nửa **Cầu*
 
 ## Phụ thuộc
 
-**Yêu cầu cài kèm [discourse-sitetor-filter](https://github.com/thaidb/discourse-sitetor-filter)** —
+**Yêu cầu cài kèm [discourse-sitetor-listing](https://github.com/thaidb/discourse-sitetor-listing)** —
 plugin đó parse & backfill custom fields (`bds_gia`, `bds_quan`, `bds_duong`…) mà
-plugin này đọc. Sau khi cài cả hai, chạy lại `rake sitetor_filter:backfill` để
+plugin này đọc. Sau khi cài cả hai, chạy lại `rake sitetor_listing:backfill` để
 quét luôn 2 category nhu cầu.
 
 ## Cài đặt
@@ -30,13 +30,13 @@ quét luôn 2 category nhu cầu.
 Thêm vào `app.yml` (cạnh dòng clone sitetor-filter):
 
 ```yaml
-          - git clone https://github.com/thaidb/discourse-sitetor-filter.git
+          - git clone https://github.com/thaidb/discourse-sitetor-listing.git
           - git clone https://github.com/thaidb/discourse-sitetor-mapping.git
 ```
 
 ```bash
 cd /var/discourse && ./launcher rebuild app
-./launcher enter app && rake sitetor_filter:backfill && exit
+./launcher enter app && rake sitetor_listing:backfill && exit
 ```
 
 Mở `https://lms.sitetor.com/mapping`.

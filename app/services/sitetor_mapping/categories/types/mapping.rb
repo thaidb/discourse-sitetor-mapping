@@ -2,7 +2,7 @@
 
 # Category type "Mapping" trong wizard tạo category (/new-category/setup):
 # tạo category kiểu này → ID tự thêm vào sitetor_mapping_categories (trang
-# /mapping) và sitetor_filter_demand_categories (để plugin filter parse dữ liệu).
+# /mapping) và sitetor_listing_demand_categories (để plugin filter parse dữ liệu).
 module SitetorMapping
   module Categories
     module Types
@@ -75,10 +75,10 @@ module SitetorMapping
             SiteSetting.set_and_log("sitetor_mapping_categories", ids.uniq.join("|"), user)
 
             # đồng bộ sang plugin filter (nếu có cài) để dữ liệu được parse
-            if SiteSetting.respond_to?(:sitetor_filter_demand_categories)
-              demand = SiteSetting.sitetor_filter_demand_categories.split("|").map(&:to_i)
+            if SiteSetting.respond_to?(:sitetor_listing_demand_categories)
+              demand = SiteSetting.sitetor_listing_demand_categories.split("|").map(&:to_i)
               demand = add ? (demand | [category.id]) : (demand - [category.id])
-              SiteSetting.set_and_log("sitetor_filter_demand_categories", demand.uniq.join("|"), user)
+              SiteSetting.set_and_log("sitetor_listing_demand_categories", demand.uniq.join("|"), user)
             end
           end
         end
