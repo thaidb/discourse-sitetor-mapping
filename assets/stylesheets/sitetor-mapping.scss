@@ -342,3 +342,14 @@
     color: var(--primary-medium);
   }
 }
+
+.sitetor-mapping .mapping-goto {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  input {
+    width: 70px;
+    margin: 0;
+  }
+}

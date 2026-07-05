@@ -71,6 +71,7 @@ export default class MappingController extends Controller {
   @tracked sStreets = [];
 
   @tracked facets = {};
+  @tracked fGotoPage = "";
 
   get topics() {
     return this.model?.topics || [];
@@ -231,6 +232,20 @@ export default class MappingController extends Controller {
       return;
     }
     this.modal.show(RecommendNowModal, { model: { topic } });
+  }
+
+  @action
+  updateGotoPage(event) {
+    this.fGotoPage = event.target.value;
+  }
+
+  @action
+  gotoPage() {
+    const n = parseInt(this.fGotoPage, 10);
+    if (!isNaN(n)) {
+      this.goPage(Math.min(Math.max(n, 1), this.totalPages));
+      this.fGotoPage = "";
+    }
   }
 
   @action

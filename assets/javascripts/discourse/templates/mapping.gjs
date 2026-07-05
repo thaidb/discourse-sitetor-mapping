@@ -228,6 +228,16 @@ export default <template>
             @disabled={{unless @controller.hasNext true}}
             @label="sitetor_mapping.next"
           />
+          <span class="mapping-goto">
+            {{i18n "sitetor_mapping.go_to_page"}}
+            <Input
+              @value={{@controller.fGotoPage}}
+              @type="number"
+              min="1"
+              {{on "input" @controller.updateGotoPage}}
+            />
+            <DButton @action={{@controller.gotoPage}} @label="sitetor_mapping.go" class="btn-small" />
+          </span>
         </div>
       </div>
     </div>

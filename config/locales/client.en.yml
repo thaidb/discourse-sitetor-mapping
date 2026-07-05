@@ -33,6 +33,8 @@ en:
       no_results: "No demands match the filter."
       prev: "‹ Prev"
       next: "Next ›"
+      go_to_page: "Go to page"
+      go: "Go"
       quick_search: "Quick search…"
       no_options: "No data yet"
       recommend_now: "Recommend now"

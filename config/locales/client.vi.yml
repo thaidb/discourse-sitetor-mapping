@@ -33,6 +33,8 @@ vi:
       no_results: "Không có nhu cầu nào khớp bộ lọc."
       prev: "‹ Trước"
       next: "Sau ›"
+      go_to_page: "Đến trang"
+      go: "Đi"
       quick_search: "Tìm nhanh…"
       no_options: "Chưa có dữ liệu"
       recommend_now: "Giới thiệu ngay"
