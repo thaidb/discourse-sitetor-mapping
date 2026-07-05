@@ -1,0 +1,20 @@
+plugins:
+  sitetor_mapping_enabled:
+    default: true
+    client: true
+  sitetor_mapping_categories:
+    default: "3344|3698"
+    type: list
+    list_type: compact
+    client: true
+  sitetor_mapping_listing_categories:
+    default: "3412|3722"
+    type: list
+    list_type: compact
+    client: true
+  sitetor_mapping_usd_rate:
+    default: 26000
+    client: true
+  sitetor_mapping_page_size:
+    default: 30
+    client: true

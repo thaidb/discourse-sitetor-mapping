@@ -1,0 +1,7 @@
+en:
+  site_settings:
+    sitetor_mapping_enabled: "Enable Sitetor Mapping Filter plugin"
+    sitetor_mapping_categories: "Category IDs of DEMANDS (Cần mua/Cần thuê) shown on /mapping (pipe-separated)"
+    sitetor_mapping_listing_categories: "Category IDs of LISTINGS (Bán/Cho thuê) used by the recommend-now button (pipe-separated)"
+    sitetor_mapping_usd_rate: "USD to VND exchange rate for budget filter"
+    sitetor_mapping_page_size: "Number of demands per page on /mapping"
